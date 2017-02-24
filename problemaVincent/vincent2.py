@@ -37,9 +37,9 @@ class Vincent:
 			nuevoPrestamo = Prestamo(cobroDiario, self.porcentajeInteres, self.cantidadDias) # Nuevo prestamo con lo recogido durante el día
 			self.listaPrestamos.append(nuevoPrestamo)	
 			
-			if self.cantidadPrestada >= 1000000 and self.cantidadPrestada < 1050000:
+			if self.cantidadPrestada >= 1000000 and self.cantidadPrestada < 1010000:
 				print "se alcanzó el millòn a los " + str(i) + " dìas"
-			#print "Prestamo " + str(i) + " Se presto " +  str(cobroDiario )+ "	Ahora hay "	+  str(self.cantidadPrestada)
+			print "Prestamo " + str(i) + " Se presto " +  str(cobroDiario )+ "	Ahora hay "	+  str(self.cantidadPrestada)
 
 			i = i + 1
 
@@ -57,14 +57,19 @@ class Prestamo:
 		self.valorCuotaDiaria = (cantidadPrestamo + ((cantidadPrestamo * porcentajeInteres) / 100 )) / 30
 		self.cantidadDias = cantidadDias
 		self.valorPrestamo = cantidadPrestamo
-		
+		self.ajustarValorCuota()
 
 	
 	def cobrar(self):
 		self.cantidadDias = self.cantidadDias -1
 		return self.valorCuotaDiaria
 
-
+	def ajustarValorCuota(self):
+		print "valor antes " + str(self.valorCuotaDiaria) 
+		residuo = self.valorCuotaDiaria % 50
+		faltante = 50 - residuo
+		self.valorCuotaDiaria = self.valorCuotaDiaria +  faltante
+		print "valor despues " + str(self.valorCuotaDiaria) 
 
 
 
